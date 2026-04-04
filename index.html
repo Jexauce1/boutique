@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA — Boutique Mode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <div class="logo">NOVA</div>
+      <nav class="nav">
+        <a href="#" class="nav-link active" data-page="accueil">Accueil</a>
+        <a href="#" class="nav-link" data-page="categories">Catéagories</a>
+        <a href="#" class="nav-link" data-page="promo">Promo &amp; Réseaux</a>
+        <a href="#" class="nav-link" data-page="contact">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" id="closeMenu">✕</button>
+    <a href="#" class="mobile-link" data-page="accueil">Accueil</a>
+    <a href="#" class="mobile-link" data-page="categories">Catégories</a>
+    <a href="#" class="mobile-link" data-page="promo">Promo &amp; Réseaux</a>
+    <a href="#" class="mobile-link" data-page="contact">Contact</a>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- PAGE ACCUEIL -->
+  <section class="page active" id="page-accueil">
+    <div class="hero">
+      <div class="hero-text">
+        <p class="hero-sub reveal">Nouvelle collection</p>
+        <h1 class="hero-title reveal">Style.<br/>Confort.<br/>Vous.</h1>
+        <p class="hero-desc reveal">Des pièces soigneusement sélectionnées pour femmes, hommes et pour tous.</p>
+        <button class="btn-primary reveal" data-page="categories">Voir la collection</button>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-card">
+          <div class="hero-img-placeholder">
+           <img src="img/Femme/img1.jpeg" alt="Nouveauté">
+          </div>
+          <div class="hero-badge">Nouveauté</div>
+        </div>
+      </div>
+    </div>
+    <div class="features">
+      <div class="feature reveal"><span class="feature-icon">🚚</span><p>Livraison rapide</p></div>
+      <div class="feature reveal"><span class="feature-icon">✅</span><p>Qualité garantie</p></div>
+      <div class="feature reveal"><span class="feature-icon">💬</span><p>Support WhatsApp</p></div>
+    </div>
+    <div class="section-title reveal">
+      <h2>Nos best-sellers</h2>
+      <p>Les articles les plus appréciés</p>
+    </div>
+    <div class="products-grid" id="bestSellers"></div>
+  </section>
+
+  <!-- PAGE CATEGORIES : onglets + 3 rangées par type à l'intérieur -->
+  <section class="page" id="page-categories">
+    <div class="section-title reveal">
+      <h2>Nos Catégories</h2>
+      <p>Choisissez votre univers</p>
+    </div>
+    <div class="cat-tabs reveal">
+      <button class="cat-tab active" data-cat="femme">👩 Femme</button>
+      <button class="cat-tab" data-cat="homme">👨 Homme</button>
+      <button class="cat-tab" data-cat="unisexe">🤝 Unisexe</button>
+    </div>
+    <!-- Les 3 rangées (Hauts / T-shirts / Joggings) sont générées ici par JS -->
+    <div id="catContent"></div>
+  </section>
+
+  <!-- PAGE PROMO -->
+  <section class="page" id="page-promo">
+    <div class="section-title reveal">
+      <h2>Promo &amp; Réseaux</h2>
+      <p>Nos offres spéciales et où nous retrouver</p>
+    </div>
+    <div class="promo-banner reveal">
+      <div class="promo-badge">🔥 Offre limitée</div>
+      <h3>-20% sur toute la collection Unisexe</h3>
+      <p>Ce weekend seulement · Code : <strong>NOVA20</strong></p>
+      <a class="btn-primary" href="https://wa.me/22900000000?text=Bonjour%20NOVA%20!%20Code%20NOVA20" target="_blank">Commander avec -20%</a>
+    </div>
+    <div class="section-title reveal" style="margin-top:2rem">
+      <h3>Suivez-nous</h3>
+      <p>Retrouvez nos dernières publications et offres flash</p>
+    </div>
+    <div class="socials-grid reveal">
+      <a class="social-card" href="https://wa.me/2290169213654" target="_blank">
+        <div class="social-icon"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M16 7C11.03 7 7 11.03 7 16c0 1.57.42 3.06 1.16 4.34L7 25l4.77-1.13A9 9 0 0016 25c4.97 0 9-4.03 9-9s-4.03-9-9-9zm4.43 12.47c-.19.53-1.1 1.01-1.51 1.07-.38.06-.86.08-1.38-.09-.32-.1-.73-.24-1.25-.47-2.19-.95-3.63-3.14-3.74-3.29-.11-.15-.89-1.18-.89-2.25s.56-1.6.76-1.82c.19-.21.42-.27.56-.27l.4.01c.13 0 .3-.05.47.36.19.44.63 1.54.69 1.65.06.11.1.24.02.38-.08.15-.12.24-.24.37l-.36.39c-.12.12-.24.25-.1.49.14.24.61 1 1.31 1.62.9.8 1.66 1.05 1.89 1.17.24.12.38.1.52-.06.14-.17.59-.69.75-.93.16-.24.32-.2.54-.12.21.08 1.35.64 1.58.76.23.11.39.17.45.27.05.1.05.57-.14 1.1z" fill="#fff"/></svg></div>
+        <div class="social-info"><strong>WhatsApp</strong><span>Commander directement</span></div>
+        <span class="social-arrow">→</span>
+      </a>
+      <a class="social-card" href="https://instagram.com/" target="_blank">
+        <div class="social-icon"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="url(#ig)"/><defs><radialGradient id="ig" cx="30%" cy="107%" r="120%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect x="10" y="10" width="12" height="12" rx="4" stroke="#fff" stroke-width="1.5"/><circle cx="16" cy="16" r="3" stroke="#fff" stroke-width="1.5"/><circle cx="20.5" cy="11.5" r="0.8" fill="#fff"/></svg></div>
+        <div class="social-info"><strong>Instagram</strong><span>@nova.boutique</span></div>
+        <span class="social-arrow">→</span>
+      </a>
+      <a class="social-card" href="https://facebook.com/" target="_blank">
+        <div class="social-icon"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M20 10h-2.5A2.5 2.5 0 0015 12.5V15h-2v3h2v7h3v-7h2l.5-3H18v-2a.5.5 0 01.5-.5H20V10z" fill="#fff"/></svg></div>
+        <div class="social-info"><strong>Facebook</strong><span>NOVA Boutique</span></div>
+        <span class="social-arrow">→</span>
+      </a>
+      <a class="social-card" href="https://tiktok.com/" target="_blank">
+        <div class="social-icon"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#000"/><path d="M20.5 10.5a3.5 3.5 0 01-3.5-3.5h-2.5v11.2a1.8 1.8 0 11-1.8-1.8v-2.6a4.3 4.3 0 104.3 4.3V14a6.5 6.5 0 003.5 1V12.5a3.5 3.5 0 01-2.5-1.5l2.5-.5z" fill="#fff"/></svg></div>
+        <div class="social-info"><strong>TikTok</strong><span>@nova.boutique</span></div>
+        <span class="social-arrow">→</span>
+      </a>
+    </div>
+    <div class="section-title reveal" style="margin-top:2rem"><h3>Nos offres du moment</h3></div>
+    <div class="promo-cards reveal" id="promoCards"></div>
+  </section>
+
+  <!-- PAGE CONTACT -->
+  <section class="page" id="page-contact">
+    <div class="section-title reveal">
+      <h2>Contactez-nous</h2>
+      <p>On vous répond rapidement 🙂</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-card reveal">
+        <span class="contact-icon">💬</span>
+        <h3>WhatsApp</h3>
+        <p>La façon la plus rapide. Réponse en moins de 5 min.</p>
+        <a class="btn-primary" href="https://wa.me/2290169213654?text=Bonjour%20NOVA%20!" target="_blank">Ouvrir WhatsApp</a>
+      </div>
+      <div class="contact-card reveal">
+        <span class="contact-icon">📸</span>
+        <h3>Instagram DM</h3>
+        <p>On répond aux DM chaque jour.</p>
+        <a class="btn-outline" href="https://instagram.com/" target="_blank">Nous écrire</a>
+      </div>
+      <div class="contact-card reveal">
+        <span class="contact-icon">📞</span>
+        <h3>Appel direct</h3>
+        <p>Vous préférez parler ? Appelez-nous.</p>
+        <a class="btn-outline" href="tel:+2290169213654">+229 69 21 36 54</a>
+      </div>
+      <div class="contact-card reveal">
+        <span class="contact-icon">📍</span>
+        <h3>Notre adresse</h3>
+        <p>Cotonou, Bénin<br/>Lun – Sam · 8h – 20h</p>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <h3>Laissez un message</h3>
+      <div class="contact-form">
+        <input type="text" id="formName" placeholder="Votre prénom" class="form-input" />
+        <input type="text" id="formProduct" placeholder="Quel article vous intéresse ?" class="form-input" />
+        <textarea id="formMsg" placeholder="Votre message..." class="form-input" rows="4"></textarea>
+        <button class="btn-primary full-w" id="sendFormBtn">Envoyer via WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-img" id="modalImg"></div>
+      <div class="modal-info">
+        <p class="modal-cat" id="modalCat"></p>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+        <p class="modal-price" id="modalPrice"></p>
+      </div>
+      <a class="btn-primary full-w" id="modalOrder" href="#" target="_blank">Commander sur WhatsApp</a>
+    </div>
+  </div>
+
+  <a class="wa-float" href="https://wa.me/2290169213654?text=Bonjour%20NOVA%20!" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M16 7C11.03 7 7 11.03 7 16c0 1.57.42 3.06 1.16 4.34L7 25l4.77-1.13A9 9 0 0016 25c4.97 0 9-4.03 9-9s-4.03-9-9-9zm4.43 12.47c-.19.53-1.1 1.01-1.51 1.07-.38.06-.86.08-1.38-.09-.32-.1-.73-.24-1.25-.47-2.19-.95-3.63-3.14-3.74-3.29-.11-.15-.89-1.18-.89-2.25s.56-1.6.76-1.82c.19-.21.42-.27.56-.27l.4.01c.13 0 .3-.05.47.36.19.44.63 1.54.69 1.65.06.11.1.24.02.38-.08.15-.12.24-.24.37l-.36.39c-.12.12-.24.25-.1.49.14.24.61 1 1.31 1.62.9.8 1.66 1.05 1.89 1.17.24.12.38.1.52-.06.14-.17.59-.69.75-.93.16-.24.32-.2.54-.12.21.08 1.35.64 1.58.76.23.11.39.17.45.27.05.1.05.57-.14 1.1z" fill="#fff"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
