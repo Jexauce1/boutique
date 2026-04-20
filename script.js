@@ -2,76 +2,210 @@
    NOVA BOUTIQUE — script.js
    ============================================================ */
 
-const WA_NUMBER = "2290169213654"; // ← Mettez votre numéro ici
+const WA_NUMBER = "2290169213654";
 
-/* ── SVG placeholders (remplacez par img: "images/photo.jpg" dans chaque article) */
-const svgShirt = `<svg viewBox="0 0 120 140" fill="none"><path d="M40 28 Q60 18 80 28 L90 52 Q74 46 64 49 Q56 46 30 52Z" fill="#c8b89a"/><rect x="30" y="52" width="60" height="65" rx="5" fill="#c8b89a"/><rect x="18" y="52" width="14" height="46" rx="5" fill="#c8b89a"/><rect x="88" y="52" width="14" height="46" rx="5" fill="#c8b89a"/></svg>`;
+const svgShirt   = `<svg viewBox="0 0 120 140" fill="none"><path d="M40 28 Q60 18 80 28 L90 52 Q74 46 64 49 Q56 46 30 52Z" fill="#c8b89a"/><rect x="30" y="52" width="60" height="65" rx="5" fill="#c8b89a"/><rect x="18" y="52" width="14" height="46" rx="5" fill="#c8b89a"/><rect x="88" y="52" width="14" height="46" rx="5" fill="#c8b89a"/></svg>`;
 const svgJogging = `<svg viewBox="0 0 120 140" fill="none"><rect x="38" y="22" width="44" height="30" rx="6" fill="#b0a899"/><rect x="28" y="52" width="30" height="70" rx="6" fill="#b0a899"/><rect x="62" y="52" width="30" height="70" rx="6" fill="#b0a899"/><rect x="38" y="50" width="44" height="10" rx="4" fill="#9a9088"/></svg>`;
-const svgHaut = `<svg viewBox="0 0 120 140" fill="none"><path d="M50 22 Q60 16 70 22 L85 40 L72 44 L70 36 L70 110 L50 110 L50 36 L48 44 L35 40Z" fill="#d4c4b0"/><ellipse cx="60" cy="22" rx="10" ry="7" fill="#d4c4b0" stroke="#c8b89a" stroke-width="1.5"/></svg>`;
+const svgHaut    = `<svg viewBox="0 0 120 140" fill="none"><path d="M50 22 Q60 16 70 22 L85 40 L72 44 L70 36 L70 110 L50 110 L50 36 L48 44 L35 40Z" fill="#d4c4b0"/><ellipse cx="60" cy="22" rx="10" ry="7" fill="#d4c4b0" stroke="#c8b89a" stroke-width="1.5"/></svg>`;
 
 /* ============================================================
    CATALOGUE
-   Pour mettre une vraie photo, remplacez  svg: svgShirt
-   par  img: "images/nom-de-votre-photo.jpg"
-   et placez vos photos dans un dossier "images/" à côté de index.html
    ============================================================ */
 const products = [
-  // ── FEMME ─────────────────────────────────────────────────
-  // Hauts femme
-  { id:1,  cat:"femme", type:"hauts",    name:"Haut Élégance",         desc:"Haut en tissu doux, coupe ajustée. Idéal pour sortie ou bureau. Disponible en beige, noir et blanc.",      price:"4 500 FCFA", tag:null,      img:"img/Femme/img2.jpeg" },
-  { id:3,  cat:"femme", type:"hauts",    name:"Haut Crop Fleuri",      desc:"Haut crop légèrement évasé, imprimé floral délicat. Parfait avec un jean taille haute.",                   price:"3 500 FCFA", tag:null,      img:"img/Femme/img2.jpeg"    },
-  { id:2,  cat:"femme", type:"hauts",    name:"Haut Col V",            desc:"Haut col V soyeux, tombé parfait. Coloris pastel disponibles : rose, bleu ciel, blanc.",                   price:"3 800 FCFA", tag:"Nouveau", img:"img/Femme/img2.jpeg"    },
-  { id:4,  cat:"femme", type:"hauts",    name:"Haut Satiné",           desc:"Tissu satiné léger, fluide. Coupe droite moderne. Coloris : champagne, noir, bordeaux.",                   price:"5 000 FCFA", tag:"Nouveau", img:"img/Femme/img2.jpeg"    },
-  // T-shirts femme
-  { id:5,  cat:"femme", type:"tshirts",  name:"T-shirt Coton Femme",   desc:"T-shirt 100% coton, respirant et confortable. Coupe droite, col rond. Parfait pour le quotidien.",         price:"2 800 FCFA", tag:null,       img:"img/Femme/img2.jpeg"   },
-  { id:6,  cat:"femme", type:"tshirts",  name:"T-shirt Oversize Femme",desc:"Oversize tendance, coton épais. Parfait pour un look décontracté et moderne.",                             price:"3 200 FCFA", tag:"Nouveau",  img:"img/Femme/img2.jpeg"   },
-  { id:7,  cat:"femme", type:"tshirts",  name:"T-shirt Graphique",     desc:"Design exclusif imprimé, édition limitée. Col rond, manches courtes. Blanc ou noir.",                      price:"3 500 FCFA", tag:null,       img:"img/Femme/img2.jpeg"   },
-  { id:8,  cat:"femme", type:"tshirts",  name:"T-shirt Basique Pack",  desc:"Pack de 2 t-shirts basiques. Coton doux, coupe féminine. Couleurs neutres.",                               price:"5 000 FCFA", tag:"Promo",   oldPrice:"6 500 FCFA", img:"img/Femme/img2.jpeg" },
-  // Joggings femme
-  { id:9,  cat:"femme", type:"joggings", name:"Jogging Femme Doux",    desc:"Jogging en molleton léger. Elastique confortable à la taille. Parfait pour la maison.",                    price:"6 500 FCFA", tag:"Promo",   oldPrice:"8 000 FCFA", img:"img/Femme/img2.jpeg" },
-  { id:10, cat:"femme", type:"joggings", name:"Ensemble Jogging Femme",desc:"Haut + bas assorti, molleton doux. Rose poudré, beige ou noir.",                                           price:"11 000 FCFA",tag:"Promo",   oldPrice:"14 000 FCFA", img:"img/Femme/img2.jpeg" },
-  { id:11, cat:"femme", type:"joggings", name:"Jogging Taille Haute",  desc:"Coupe taille haute très tendance. Tissu épais et confortable. Noir, gris ou rose.",                        price:"7 000 FCFA", tag:"Nouveau", img:"img/Femme/img2.jpeg" },
-  { id:12, cat:"femme", type:"joggings", name:"Jogging Velours Femme", desc:"Velours doux au toucher, coupe slim. Très élégant pour un look casual-chic.",                             price:"8 500 FCFA", tag:null,      img:"img/Femme/img2.jpeg" },
-
-  // ── HOMME ─────────────────────────────────────────────────
-  // Hauts homme
-  { id:13, cat:"homme", type:"hauts",    name:"Haut Sport Homme",      desc:"Haut léger pour le sport ou le quotidien. Tissu technique respirant. Noir, blanc, marine.",                price:"4 000 FCFA", tag:null,    img:"img/Homme/img01.jpeg"    },
-  { id:14, cat:"homme", type:"hauts",    name:"Haut Lin Homme",        desc:"Haut en lin naturel, très respirant. Idéal pour les journées chaudes. Beige ou blanc.",                   price:"5 500 FCFA", tag:"Nouveau",img:"img/Homme/img01.jpeg"     },
-  // T-shirts homme
-  { id:15, cat:"homme", type:"tshirts",  name:"T-shirt Classique",     desc:"T-shirt classique coton épais, coupe droite. Disponible en S, M, L, XL. Noir, blanc, marine.",            price:"3 000 FCFA", tag:null,      img:"img/Homme/img01.jpeg"    },
-  { id:16, cat:"homme", type:"tshirts",  name:"T-shirt Oversize",      desc:"Coupe oversize tendance. Tissu lourd de qualité premium. Idéal pour un look streetwear.",                  price:"3 800 FCFA", tag:"Nouveau", img:"img/Homme/img01.jpeg"    },
-  { id:17, cat:"homme", type:"tshirts",  name:"T-shirt Graphique",     desc:"Design imprimé exclusif NOVA. Édition limitée. Coton 220g. Blanc ou noir.",                               price:"4 200 FCFA", tag:"Nouveau", img:"img/Homme/img01.jpeg"    },
-  { id:18, cat:"homme", type:"tshirts",  name:"T-shirt Pack x2",       desc:"Pack de 2 t-shirts basiques col rond. Idéal comme sous-vêtement ou tenue décontractée.",                  price:"5 000 FCFA", tag:null,      img:"img/Homme/img01.jpeg"    },
-  // Joggings homme
-  { id:19, cat:"homme", type:"joggings", name:"Jogging Sport",         desc:"Jogging en coton brossé, taille élastique avec cordon. Poches zippées. Très confortable.",                price:"7 000 FCFA", tag:null,      img:"img/Homme/img01.jpeg"  },
-  { id:20, cat:"homme", type:"joggings", name:"Ensemble Jogging",      desc:"Haut + bas assortis. Coton molletonné. Gris chiné, noir ou navy.",                                        price:"12 000 FCFA",tag:"Promo",   oldPrice:"15 000 FCFA", img:"img/Homme/img01.jpeg"  },
-  { id:21, cat:"homme", type:"joggings", name:"Jogging Premium",       desc:"Molleton épais anti-froid. Coupe droite avec bandes latérales. Très résistant.",                           price:"8 500 FCFA", tag:null,      img:"img/Homme/img01.jpeg"  },
-  { id:22, cat:"homme", type:"joggings", name:"Jogging Slim Homme",    desc:"Coupe slim moderne. Tissu stretch confortable. Noir ou gris anthracite.",                                  price:"7 500 FCFA", tag:"Nouveau", img:"img/Homme/img01.jpeg"  },
-
-  // ── UNISEXE ───────────────────────────────────────────────
-  // Hauts unisexe
-  { id:23, cat:"unisexe", type:"hauts",    name:"Haut Sport Unisexe",  desc:"Haut technique unisexe, léger et respirant. Parfait pour le sport ou la détente.",                       price:"3 800 FCFA", tag:null,      img:"img/Unisexe/img01.jpeg"   },
-  { id:24, cat:"unisexe", type:"hauts",    name:"Haut Oversize",       desc:"Haut oversize ample et confortable. Coupe neutre pour tous. Beige, noir ou blanc.",                       price:"4 200 FCFA", tag:"Nouveau", img:"img/Unisexe/img01.jpeg" },
-  // T-shirts unisexe
-  { id:25, cat:"unisexe", type:"tshirts",  name:"T-shirt Basic",       desc:"Le basique indispensable. Coupe neutre adaptée à tous. Matière épaisse et douce. S à XXL.",               price:"2 500 FCFA", tag:null,      img:"img/Unisexe/img01.jpeg"   },
-  { id:26, cat:"unisexe", type:"tshirts",  name:"T-shirt Graphique",   desc:"T-shirt avec design imprimé exclusif NOVA. Édition limitée. Unisexe, coupe confortable.",                 price:"4 000 FCFA", tag:"Promo",   oldPrice:"5 000 FCFA", img:"img/Unisexe/img01.jpeg" },
-  { id:27, cat:"unisexe", type:"tshirts",  name:"T-shirt Tie & Dye",  desc:"Tie & Dye fait à la main, chaque pièce est unique. Coupe large. Plusieurs coloris.",                      price:"4 500 FCFA", tag:"Nouveau", img:"img/Unisexe/img01.jpeg"   },
-  { id:28, cat:"unisexe", type:"tshirts",  name:"T-shirt Long",        desc:"T-shirt manches longues, coton doux. Coupe neutre. Blanc, noir ou gris.",                                  price:"3 500 FCFA", tag:null,      img:"img/Unisexe/img01.jpeg"   },
-  // Joggings unisexe
-  { id:29, cat:"unisexe", type:"joggings", name:"Jogging Comfort",     desc:"Jogging ample et confortable pour tous. Molleton léger anti-bouloche. Couleurs neutres.",                  price:"5 500 FCFA", tag:"Nouveau", img:"img/Unisexe/img01.jpeg" },
-  { id:30, cat:"unisexe", type:"joggings", name:"Ensemble Détente",    desc:"Duo haut + jogging assortis, unisexe. Parfait pour la maison ou une sortie décontractée.",                price:"9 500 FCFA", tag:null,      img:"img/Unisexe/img01.jpeg" },
-  { id:31, cat:"unisexe", type:"joggings", name:"Jogging Pastel",      desc:"Coloris pastel doux. Taille élastique, poches. Très doux au toucher.",                                    price:"6 000 FCFA", tag:null,      img:"img/Unisexe/img01.jpeg" },
-  { id:32, cat:"unisexe", type:"joggings", name:"Jogging Molleton Xl", desc:"Jogging molleton épais XXL, ultra doux. Pour les journées fraîches.",                                      price:"7 200 FCFA", tag:"Promo",   oldPrice:"9 000 FCFA", img:"img/Unisexe/img01.jpeg" },
+  // FEMME
+  { id:1,  cat:"femme", type:"hauts",    name:"Haut Élégance",          desc:"Haut en tissu doux, coupe ajustée. Beige, noir et blanc.",          price:"4 500 FCFA", priceNum:4500,  tag:null,      img:"img/Femme/img2.jpeg" },
+  { id:2,  cat:"femme", type:"hauts",    name:"Haut Col V",             desc:"Haut col V soyeux, tombé parfait. Coloris pastel.",                 price:"3 800 FCFA", priceNum:3800,  tag:"Nouveau", img:"img/Femme/img2.jpeg" },
+  { id:3,  cat:"femme", type:"hauts",    name:"Haut Crop Fleuri",       desc:"Haut crop imprimé floral. Parfait avec un jean taille haute.",      price:"3 500 FCFA", priceNum:3500,  tag:null,      img:"img/Femme/img2.jpeg" },
+  { id:4,  cat:"femme", type:"hauts",    name:"Haut Satiné",            desc:"Tissu satiné léger. Champagne, noir, bordeaux.",                   price:"5 000 FCFA", priceNum:5000,  tag:"Nouveau", img:"img/Femme/img2.jpeg" },
+  { id:5,  cat:"femme", type:"tshirts",  name:"T-shirt Coton Femme",    desc:"100% coton, respirant. Coupe droite, col rond.",                   price:"2 800 FCFA", priceNum:2800,  tag:null,      img:"img/Femme/img2.jpeg" },
+  { id:6,  cat:"femme", type:"tshirts",  name:"T-shirt Oversize Femme", desc:"Oversize tendance, coton épais. Look décontracté.",                price:"3 200 FCFA", priceNum:3200,  tag:"Nouveau", img:"img/Femme/img2.jpeg" },
+  { id:7,  cat:"femme", type:"tshirts",  name:"T-shirt Graphique",      desc:"Design exclusif imprimé, édition limitée. Col rond.",              price:"3 500 FCFA", priceNum:3500,  tag:null,      img:"img/Femme/img2.jpeg" },
+  { id:8,  cat:"femme", type:"tshirts",  name:"T-shirt Basique Pack",   desc:"Pack de 2 t-shirts basiques. Coton doux, coupe féminine.",         price:"5 000 FCFA", priceNum:5000,  tag:"Promo", oldPrice:"6 500 FCFA", img:"img/Femme/img2.jpeg" },
+  { id:9,  cat:"femme", type:"joggings", name:"Jogging Femme Doux",     desc:"Molleton léger. Elastique confortable. Parfait pour la maison.",   price:"6 500 FCFA", priceNum:6500,  tag:"Promo", oldPrice:"8 000 FCFA", img:"img/Femme/img2.jpeg" },
+  { id:10, cat:"femme", type:"joggings", name:"Ensemble Jogging Femme", desc:"Haut + bas assorti, molleton doux. Rose, beige ou noir.",          price:"11 000 FCFA",priceNum:11000, tag:"Promo", oldPrice:"14 000 FCFA", img:"img/Femme/img2.jpeg" },
+  { id:11, cat:"femme", type:"joggings", name:"Jogging Taille Haute",   desc:"Coupe taille haute tendance. Noir, gris ou rose.",                 price:"7 000 FCFA", priceNum:7000,  tag:"Nouveau", img:"img/Femme/img2.jpeg" },
+  { id:12, cat:"femme", type:"joggings", name:"Jogging Velours Femme",  desc:"Velours doux, coupe slim. Élégant pour un look casual-chic.",      price:"8 500 FCFA", priceNum:8500,  tag:null,      img:"img/Femme/img2.jpeg" },
+  // HOMME
+  { id:13, cat:"homme", type:"hauts",    name:"Haut Sport Homme",       desc:"Tissu technique respirant. Noir, blanc, marine.",                  price:"4 000 FCFA", priceNum:4000,  tag:null,      img:"img/Homme/img01.jpeg" },
+  { id:14, cat:"homme", type:"hauts",    name:"Haut Lin Homme",         desc:"Lin naturel, très respirant. Idéal pour les journées chaudes.",    price:"5 500 FCFA", priceNum:5500,  tag:"Nouveau", img:"img/Homme/img01.jpeg" },
+  { id:15, cat:"homme", type:"tshirts",  name:"T-shirt Classique",      desc:"Coton épais, coupe droite. S, M, L, XL. Noir, blanc, marine.",    price:"3 000 FCFA", priceNum:3000,  tag:null,      img:"img/Homme/img01.jpeg" },
+  { id:16, cat:"homme", type:"tshirts",  name:"T-shirt Oversize",       desc:"Coupe oversize tendance. Tissu lourd premium. Look streetwear.",   price:"3 800 FCFA", priceNum:3800,  tag:"Nouveau", img:"img/Homme/img01.jpeg" },
+  { id:17, cat:"homme", type:"tshirts",  name:"T-shirt Graphique",      desc:"Design imprimé exclusif NOVA. Édition limitée. Coton 220g.",      price:"4 200 FCFA", priceNum:4200,  tag:"Nouveau", img:"img/Homme/img01.jpeg" },
+  { id:18, cat:"homme", type:"tshirts",  name:"T-shirt Pack x2",        desc:"Pack 2 t-shirts basiques col rond.",                              price:"5 000 FCFA", priceNum:5000,  tag:null,      img:"img/Homme/img01.jpeg" },
+  { id:19, cat:"homme", type:"joggings", name:"Jogging Sport",          desc:"Coton brossé, taille élastique + cordon. Poches zippées.",        price:"7 000 FCFA", priceNum:7000,  tag:null,      img:"img/Homme/img01.jpeg" },
+  { id:20, cat:"homme", type:"joggings", name:"Ensemble Jogging",       desc:"Haut + bas assortis. Molletonné. Gris chiné, noir ou navy.",      price:"12 000 FCFA",priceNum:12000, tag:"Promo", oldPrice:"15 000 FCFA", img:"img/Homme/img01.jpeg" },
+  { id:21, cat:"homme", type:"joggings", name:"Jogging Premium",        desc:"Molleton épais anti-froid. Bandes latérales. Très résistant.",    price:"8 500 FCFA", priceNum:8500,  tag:null,      img:"img/Homme/img01.jpeg" },
+  { id:22, cat:"homme", type:"joggings", name:"Jogging Slim Homme",     desc:"Coupe slim moderne. Tissu stretch confortable.",                  price:"7 500 FCFA", priceNum:7500,  tag:"Nouveau", img:"img/Homme/img01.jpeg" },
+  // UNISEXE
+  { id:23, cat:"unisexe", type:"hauts",    name:"Haut Sport Unisexe",   desc:"Léger et respirant pour tous. Sport ou détente.",                 price:"3 800 FCFA", priceNum:3800,  tag:null,      img:"img/Unisexe/img01.jpeg" },
+  { id:24, cat:"unisexe", type:"hauts",    name:"Haut Oversize",        desc:"Ample et confortable. Beige, noir ou blanc.",                     price:"4 200 FCFA", priceNum:4200,  tag:"Nouveau", img:"img/Unisexe/img01.jpeg" },
+  { id:25, cat:"unisexe", type:"tshirts",  name:"T-shirt Basic",        desc:"Le basique indispensable. Coupe neutre S à XXL.",                 price:"2 500 FCFA", priceNum:2500,  tag:null,      img:"img/Unisexe/img01.jpeg" },
+  { id:26, cat:"unisexe", type:"tshirts",  name:"T-shirt Graphique",    desc:"Design exclusif NOVA. Édition limitée.",                          price:"4 000 FCFA", priceNum:4000,  tag:"Promo", oldPrice:"5 000 FCFA", img:"img/Unisexe/img01.jpeg" },
+  { id:27, cat:"unisexe", type:"tshirts",  name:"T-shirt Tie & Dye",    desc:"Tie & Dye fait main, chaque pièce est unique.",                   price:"4 500 FCFA", priceNum:4500,  tag:"Nouveau", img:"img/Unisexe/img01.jpeg" },
+  { id:28, cat:"unisexe", type:"tshirts",  name:"T-shirt Long",         desc:"Manches longues, coton doux. Coupe neutre.",                      price:"3 500 FCFA", priceNum:3500,  tag:null,      img:"img/Unisexe/img01.jpeg" },
+  { id:29, cat:"unisexe", type:"joggings", name:"Jogging Comfort",      desc:"Ample pour tous. Molleton léger anti-bouloche.",                  price:"5 500 FCFA", priceNum:5500,  tag:"Nouveau", img:"img/Unisexe/img01.jpeg" },
+  { id:30, cat:"unisexe", type:"joggings", name:"Ensemble Détente",     desc:"Haut + jogging assortis. Maison ou sortie décontractée.",         price:"9 500 FCFA", priceNum:9500,  tag:null,      img:"img/Unisexe/img01.jpeg" },
+  { id:31, cat:"unisexe", type:"joggings", name:"Jogging Pastel",       desc:"Coloris pastel doux. Taille élastique, poches.",                  price:"6 000 FCFA", priceNum:6000,  tag:null,      img:"img/Unisexe/img01.jpeg" },
+  { id:32, cat:"unisexe", type:"joggings", name:"Jogging Molleton XL",  desc:"Molleton épais XXL, ultra doux. Pour les journées fraîches.",     price:"7 200 FCFA", priceNum:7200,  tag:"Promo", oldPrice:"9 000 FCFA", img:"img/Unisexe/img01.jpeg" },
 ];
 
-// Définition des 3 rangées et leurs étiquettes
 const ROWS = [
-  { type: "hauts",    label: "🧥 Ensemble",    sub: "ensembles & tops" },
-  { type: "tshirts",  label: "👕 T-shirts", sub: "T-shirts & basiques" },
-  { type: "joggings", label: "🩳 Joggings", sub: "Joggings & bagy" },
+  { type:"hauts",    label:"🧥 Ensembles",  sub:"Ensembles & tops" },
+  { type:"tshirts",  label:"👕 T-shirts",   sub:"T-shirts & basiques" },
+  { type:"joggings", label:"🩳 Joggings",   sub:"Joggings & baggy" },
 ];
 
 const bestSellerIds = [5, 15, 25, 29];
+
+/* ============================================================
+   PANIER
+   ============================================================ */
+let cart = []; // [{ product, qty }]
+
+function cartTotal() {
+  return cart.reduce((sum, item) => sum + item.product.priceNum * item.qty, 0);
+}
+function cartCount() {
+  return cart.reduce((sum, item) => sum + item.qty, 0);
+}
+function formatPrice(n) {
+  return n.toLocaleString('fr-FR') + ' FCFA';
+}
+
+function addToCart(product) {
+  const existing = cart.find(i => i.product.id === product.id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ product, qty: 1 });
+  }
+  updateCartUI();
+  showToast(`✓ ${product.name} ajouté au panier`);
+  closeModal();
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(i => i.product.id !== productId);
+  updateCartUI();
+}
+
+function changeQty(productId, delta) {
+  const item = cart.find(i => i.product.id === productId);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(productId);
+  else updateCartUI();
+}
+
+function clearCart() {
+  cart = [];
+  updateCartUI();
+}
+
+function updateCartUI() {
+  // Badge compteur
+  const count = cartCount();
+  const badge = document.getElementById('cartCount');
+  badge.textContent = count;
+  badge.classList.toggle('visible', count > 0);
+
+  // Corps du drawer
+  const body = document.getElementById('cartBody');
+  if (cart.length === 0) {
+    body.innerHTML = `
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛍️</div>
+        <p>Votre panier est vide</p>
+        <span>Ajoutez des articles pour commencer</span>
+      </div>`;
+  } else {
+    body.innerHTML = '';
+    cart.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'cart-item';
+      const mediaHtml = item.product.img
+        ? `<img src="${item.product.img}" alt="${item.product.name}">`
+        : item.product.svg || '';
+      el.innerHTML = `
+        <div class="cart-item-img">${mediaHtml}</div>
+        <div class="cart-item-info">
+          <p class="cart-item-name">${item.product.name}</p>
+          <p class="cart-item-price">${item.product.price}</p>
+          <div class="cart-item-qty">
+            <button class="qty-btn" data-id="${item.product.id}" data-delta="-1">−</button>
+            <span class="qty-value">${item.qty}</span>
+            <button class="qty-btn" data-id="${item.product.id}" data-delta="1">+</button>
+          </div>
+        </div>
+        <button class="cart-item-remove" data-id="${item.product.id}" title="Supprimer">✕</button>
+      `;
+      body.appendChild(el);
+    });
+
+    // Délégation événements
+    body.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', () => changeQty(parseInt(btn.dataset.id), parseInt(btn.dataset.delta)));
+    });
+    body.querySelectorAll('.cart-item-remove').forEach(btn => {
+      btn.addEventListener('click', () => removeFromCart(parseInt(btn.dataset.id)));
+    });
+  }
+
+  // Total
+  document.getElementById('cartTotal').textContent = formatPrice(cartTotal());
+
+  // Bouton commander
+  document.getElementById('checkoutBtn').disabled = cart.length === 0;
+}
+
+/* Ouvrir / fermer le panier */
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('cartBtn').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+document.getElementById('clearCartBtn').addEventListener('click', () => {
+  if (cart.length === 0) return;
+  if (confirm('Vider le panier ?')) clearCart();
+});
+
+/* Confirmer la commande → WhatsApp */
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  if (cart.length === 0) return;
+
+  let msg = `Bonjour NOVA ! 👋\n\n`;
+  msg += `🛍️ *Ma commande :*\n`;
+  msg += `${'─'.repeat(25)}\n`;
+  cart.forEach(item => {
+    const lineTotal = item.product.priceNum * item.qty;
+    msg += `• ${item.product.name}\n`;
+    msg += `  Qté : ${item.qty} × ${item.product.price} = ${formatPrice(lineTotal)}\n`;
+  });
+  msg += `${'─'.repeat(25)}\n`;
+  msg += `💰 *Total : ${formatPrice(cartTotal())}*\n\n`;
+  msg += `Merci de confirmer les disponibilités et la livraison. 🙏`;
+
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+});
+
+/* Toast */
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+}
 
 /* ============================================================
    NAVIGATION
@@ -83,7 +217,7 @@ function goToPage(pageId) {
   pages.forEach(p => p.classList.remove('active'));
   navLinks.forEach(l => l.classList.remove('active'));
   const target = document.getElementById('page-' + pageId);
-  if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
+  if (target) { target.classList.add('active'); window.scrollTo(0,0); }
   navLinks.forEach(l => { if (l.dataset.page === pageId) l.classList.add('active'); });
   closeMobileMenu();
   setTimeout(observeReveals, 60);
@@ -92,8 +226,6 @@ function goToPage(pageId) {
 navLinks.forEach(link => {
   link.addEventListener('click', e => { e.preventDefault(); goToPage(link.dataset.page); });
 });
-
-// Boutons avec data-page (hero, etc.)
 document.addEventListener('click', e => {
   const btn = e.target.closest('[data-page]');
   if (!btn) return;
@@ -115,7 +247,6 @@ function closeMobileMenu() { mobileMenu.classList.remove('open'); overlay.classL
 menuBtn.addEventListener('click', openMobileMenu);
 document.getElementById('closeMenu').addEventListener('click', closeMobileMenu);
 overlay.addEventListener('click', closeMobileMenu);
-
 window.addEventListener('scroll', () => {
   document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
 });
@@ -127,14 +258,10 @@ function buildCard(product) {
   const card = document.createElement('div');
   card.className = 'product-card';
 
-  const tagHtml = product.tag
-    ? `<span class="tag${product.tag === 'Promo' ? ' promo' : ''}">${product.tag}</span>` : '';
-  const oldHtml = product.oldPrice
-    ? `<span class="old-price">${product.oldPrice}</span>` : '';
-
-  // Image réelle ou SVG placeholder
+  const tagHtml  = product.tag ? `<span class="tag${product.tag==='Promo'?' promo':''}">${product.tag}</span>` : '';
+  const oldHtml  = product.oldPrice ? `<span class="old-price">${product.oldPrice}</span>` : '';
   const mediaHtml = product.img
-    ? `<img src="${product.img}" alt="${product.name}" loading="lazy" />`
+    ? `<img src="${product.img}" alt="${product.name}" loading="lazy">`
     : product.svg;
 
   card.innerHTML = `
@@ -143,34 +270,45 @@ function buildCard(product) {
       <p class="product-name">${product.name}</p>
       <p class="product-price">${product.price}${oldHtml}</p>
     </div>
-    <span class="btn-order">Commander</span>
+    <button class="btn-add-cart">🛒 Ajouter au panier</button>
   `;
-  card.querySelector('.btn-order').addEventListener('click', e => { e.stopPropagation(); openModal(product); });
-  card.addEventListener('click', () => openModal(product));
+
+  // Clic sur carte → modal détail
+  card.addEventListener('click', e => {
+    if (e.target.classList.contains('btn-add-cart')) return;
+    openModal(product);
+  });
+  // Clic direct sur le bouton → ajoute sans ouvrir la modal
+  card.querySelector('.btn-add-cart').addEventListener('click', e => {
+    e.stopPropagation();
+    addToCart(product);
+  });
+
   return card;
 }
 
 /* ============================================================
-   GRILLE BEST SELLERS (accueil)
+   BEST SELLERS
    ============================================================ */
 const grid = document.getElementById('bestSellers');
-products.filter(p => bestSellerIds.includes(p.id))
-  .forEach((p, i) => {
-    const c = buildCard(p);
-    c.style.animationDelay = `${i * 70}ms`;
-    grid.appendChild(c);
-  });
+products.filter(p => bestSellerIds.includes(p.id)).forEach((p, i) => {
+  const c = buildCard(p);
+  c.style.animationDelay = `${i * 70}ms`;
+  grid.appendChild(c);
+});
 
 /* ============================================================
-   ONGLETS + 3 RANGÉES CARROUSEL PAR CATÉGORIE
+   CARROUSELS PAR CATÉGORIE
    ============================================================ */
 const catContent = document.getElementById('catContent');
-let activeCarousels = {}; // { "femme-hauts": {index, total}, ... }
+let activeCarousels = {};
 
 function CARD_W() {
   const w = window.innerWidth;
-  if (w >= 640) return 200 + 14;
-  if (w >= 400) return 170 + 14;
+  if (w >= 1280) return 260 + 20;
+  if (w >= 1024) return 240 + 20;
+  if (w >= 640)  return 210 + 16;
+  if (w >= 400)  return 170 + 14;
   return 155 + 14;
 }
 
@@ -200,12 +338,9 @@ function buildCarouselRow(cat, rowDef) {
 
   const track = section.querySelector(`#track-${key}`);
   const dots  = section.querySelector(`#dots-${key}`);
-
   items.forEach(p => track.appendChild(buildCard(p)));
-
   activeCarousels[key] = { index: 0, total: items.length };
 
-  // Dots
   items.forEach((_, i) => {
     const d = document.createElement('span');
     d.className = 'dot' + (i === 0 ? ' active' : '');
@@ -213,16 +348,11 @@ function buildCarouselRow(cat, rowDef) {
     dots.appendChild(d);
   });
 
-  // Boutons flèches
   section.querySelectorAll('.row-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      carouselGoTo(key, activeCarousels[key].index + parseInt(btn.dataset.dir));
-    });
+    btn.addEventListener('click', () => carouselGoTo(key, activeCarousels[key].index + parseInt(btn.dataset.dir)));
   });
 
-  // Swipe
   initSwipe(key, section.querySelector(`#wrap-${key}`));
-
   return section;
 }
 
@@ -233,14 +363,10 @@ function carouselGoTo(key, index) {
   const track = document.getElementById(`track-${key}`);
   const dots  = document.getElementById(`dots-${key}`);
   if (!wrap || !track) return;
-
   const visible  = Math.floor(wrap.offsetWidth / CARD_W());
   const maxIndex = Math.max(0, state.total - visible);
   state.index    = Math.max(0, Math.min(index, maxIndex));
-
   track.style.transform = `translateX(-${state.index * CARD_W()}px)`;
-
-  // Mettre à jour dots
   dots && dots.querySelectorAll('.dot').forEach((d, i) => {
     d.classList.toggle('active', i === state.index || (state.index >= maxIndex && i === maxIndex));
   });
@@ -256,7 +382,6 @@ function renderCategory(cat) {
   setTimeout(observeReveals, 60);
 }
 
-// Onglets
 document.querySelectorAll('.cat-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
@@ -264,50 +389,31 @@ document.querySelectorAll('.cat-tab').forEach(tab => {
     renderCategory(tab.dataset.cat);
   });
 });
-
-// Charger femme par défaut
 renderCategory('femme');
 
-// Resize
 window.addEventListener('resize', () => {
   Object.keys(activeCarousels).forEach(key => carouselGoTo(key, activeCarousels[key].index));
 });
 
-/* ── Swipe tactile ── */
 function initSwipe(key, wrap) {
-  let startX = 0, startY = 0, dragging = false, moved = false;
-
-  wrap.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    dragging = true; moved = false;
-  }, { passive: true });
-
-  wrap.addEventListener('touchmove', e => {
-    if (!dragging) return;
-    const dx = e.touches[0].clientX - startX;
-    const dy = e.touches[0].clientY - startY;
-    if (Math.abs(dx) > Math.abs(dy) + 5) { moved = true; e.preventDefault(); }
-  }, { passive: false });
-
-  wrap.addEventListener('touchend', e => {
+  let startX = 0, dragging = false, moved = false;
+  wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; moved = false; }, { passive: true });
+  wrap.addEventListener('touchmove',  e => { if (!dragging) return; if (Math.abs(e.touches[0].clientX - startX) > 8) { moved = true; e.preventDefault(); } }, { passive: false });
+  wrap.addEventListener('touchend',   e => {
     if (!dragging || !moved) { dragging = false; return; }
     dragging = false;
     const diff = startX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) carouselGoTo(key, activeCarousels[key].index + (diff > 0 ? 1 : -1));
   });
-
-  // Drag souris
-  wrap.addEventListener('mousedown', e => { startX = e.clientX; dragging = true; moved = false; });
-  wrap.addEventListener('mousemove', e => { if (dragging && Math.abs(e.clientX - startX) > 5) moved = true; });
-  wrap.addEventListener('mouseup',   e => {
+  wrap.addEventListener('mousedown',  e => { startX = e.clientX; dragging = true; moved = false; });
+  wrap.addEventListener('mousemove',  e => { if (dragging && Math.abs(e.clientX - startX) > 5) moved = true; });
+  wrap.addEventListener('mouseup',    e => {
     if (!dragging || !moved) { dragging = false; return; }
     dragging = false;
     const diff = startX - e.clientX;
     if (Math.abs(diff) > 40) carouselGoTo(key, activeCarousels[key].index + (diff > 0 ? 1 : -1));
   });
   wrap.addEventListener('mouseleave', () => { dragging = false; });
-  wrap.style.cursor = 'grab';
 }
 
 /* ============================================================
@@ -328,24 +434,22 @@ promoOffers.forEach(o => {
 });
 
 /* ============================================================
-   MODAL
+   MODAL DÉTAIL ARTICLE
    ============================================================ */
 const modalOverlay = document.getElementById('modalOverlay');
 const modalClose   = document.getElementById('modalClose');
-const modalOrder   = document.getElementById('modalOrder');
+let   currentProduct = null;
 
 function openModal(product) {
+  currentProduct = product;
   const mediaHtml = product.img
-    ? `<img src="${product.img}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;border-radius:16px;" />`
+    ? `<img src="${product.img}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">`
     : product.svg;
-  document.getElementById('modalImg').innerHTML   = mediaHtml;
-  document.getElementById('modalCat').textContent = product.cat.charAt(0).toUpperCase() + product.cat.slice(1) + ' · ' + ROWS.find(r=>r.type===product.type)?.label;
+  document.getElementById('modalImg').innerHTML    = mediaHtml;
+  document.getElementById('modalCat').textContent  = product.cat.charAt(0).toUpperCase() + product.cat.slice(1);
   document.getElementById('modalTitle').textContent = product.name;
   document.getElementById('modalDesc').textContent  = product.desc;
   document.getElementById('modalPrice').textContent = product.price;
-
-  const msg = encodeURIComponent(`Bonjour NOVA ! 👋\nJe voudrais commander : *${product.name}*\nPrix : ${product.price}\nMerci de me donner les disponibilités.`);
-  modalOrder.href = `https://wa.me/${WA_NUMBER}?text=${msg}`;
   modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -353,9 +457,15 @@ function openModal(product) {
 function closeModal() {
   modalOverlay.classList.remove('open');
   document.body.style.overflow = '';
+  currentProduct = null;
 }
+
 modalClose.addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+
+document.getElementById('modalAddCart').addEventListener('click', () => {
+  if (currentProduct) addToCart(currentProduct);
+});
 
 /* ============================================================
    FORMULAIRE CONTACT
@@ -373,7 +483,7 @@ document.getElementById('sendFormBtn').addEventListener('click', () => {
 });
 
 /* ============================================================
-   ANIMATIONS REVEAL
+   REVEAL ANIMATIONS
    ============================================================ */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
@@ -383,3 +493,6 @@ function observeReveals() {
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
 }
 observeReveals();
+
+// Init panier
+updateCartUI();
