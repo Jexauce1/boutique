@@ -16,10 +16,19 @@
       <div class="logo">NOVA</div>
       <nav class="nav">
         <a href="#" class="nav-link active" data-page="accueil">Accueil</a>
-        <a href="#" class="nav-link" data-page="categories">Catéagories</a>
+        <a href="#" class="nav-link" data-page="categories">Catégories</a>
         <a href="#" class="nav-link" data-page="promo">Promo &amp; Réseaux</a>
         <a href="#" class="nav-link" data-page="contact">Contact</a>
       </nav>
+      <!-- Icône panier -->
+      <button class="cart-btn" id="cartBtn" aria-label="Panier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
       <button class="menu-btn" id="menuBtn" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -47,7 +56,7 @@
       <div class="hero-visual reveal">
         <div class="hero-card">
           <div class="hero-img-placeholder">
-           <img src="img/Femme/img1.jpeg" alt="Nouveauté">
+            <img src="img/Femme/img1.jpeg" alt="Nouveauté">
           </div>
           <div class="hero-badge">Nouveauté</div>
         </div>
@@ -65,7 +74,7 @@
     <div class="products-grid" id="bestSellers"></div>
   </section>
 
-  <!-- PAGE CATEGORIES : onglets + 3 rangées par type à l'intérieur -->
+  <!-- PAGE CATEGORIES -->
   <section class="page" id="page-categories">
     <div class="section-title reveal">
       <h2>Nos Catégories</h2>
@@ -76,7 +85,6 @@
       <button class="cat-tab" data-cat="homme">👨 Homme</button>
       <button class="cat-tab" data-cat="unisexe">🤝 Unisexe</button>
     </div>
-    <!-- Les 3 rangées (Hauts / T-shirts / Joggings) sont générées ici par JS -->
     <div id="catContent"></div>
   </section>
 
@@ -90,7 +98,7 @@
       <div class="promo-badge">🔥 Offre limitée</div>
       <h3>-20% sur toute la collection Unisexe</h3>
       <p>Ce weekend seulement · Code : <strong>NOVA20</strong></p>
-      <a class="btn-primary" href="https://wa.me/22900000000?text=Bonjour%20NOVA%20!%20Code%20NOVA20" target="_blank">Commander avec -20%</a>
+      <a class="btn-primary" href="https://wa.me/2290169213654?text=Bonjour%20NOVA%20!%20Code%20NOVA20" target="_blank">Commander avec -20%</a>
     </div>
     <div class="section-title reveal" style="margin-top:2rem">
       <h3>Suivez-nous</h3>
@@ -164,7 +172,7 @@
     </div>
   </section>
 
-  <!-- MODAL -->
+  <!-- MODAL DETAIL ARTICLE -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal" id="modal">
       <button class="modal-close" id="modalClose">✕</button>
@@ -175,9 +183,35 @@
         <p class="modal-desc" id="modalDesc"></p>
         <p class="modal-price" id="modalPrice"></p>
       </div>
-      <a class="btn-primary full-w" id="modalOrder" href="#" target="_blank">Commander sur WhatsApp</a>
+      <button class="btn-cart-add full-w" id="modalAddCart">🛒 Ajouter au panier</button>
     </div>
   </div>
+
+  <!-- PANIER DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2 class="cart-title">Mon Panier</h2>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-body" id="cartBody">
+      <!-- items injectés par JS -->
+    </div>
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span class="cart-total-amount" id="cartTotal">0 FCFA</span>
+      </div>
+      <button class="btn-checkout" id="checkoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.08-1.08a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Confirmer via WhatsApp
+      </button>
+      <button class="btn-clear-cart" id="clearCartBtn">Vider le panier</button>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">✓ Ajouté au panier</div>
 
   <a class="wa-float" href="https://wa.me/2290169213654?text=Bonjour%20NOVA%20!" target="_blank" aria-label="WhatsApp">
     <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M16 7C11.03 7 7 11.03 7 16c0 1.57.42 3.06 1.16 4.34L7 25l4.77-1.13A9 9 0 0016 25c4.97 0 9-4.03 9-9s-4.03-9-9-9zm4.43 12.47c-.19.53-1.1 1.01-1.51 1.07-.38.06-.86.08-1.38-.09-.32-.1-.73-.24-1.25-.47-2.19-.95-3.63-3.14-3.74-3.29-.11-.15-.89-1.18-.89-2.25s.56-1.6.76-1.82c.19-.21.42-.27.56-.27l.4.01c.13 0 .3-.05.47.36.19.44.63 1.54.69 1.65.06.11.1.24.02.38-.08.15-.12.24-.24.37l-.36.39c-.12.12-.24.25-.1.49.14.24.61 1 1.31 1.62.9.8 1.66 1.05 1.89 1.17.24.12.38.1.52-.06.14-.17.59-.69.75-.93.16-.24.32-.2.54-.12.21.08 1.35.64 1.58.76.23.11.39.17.45.27.05.1.05.57-.14 1.1z" fill="#fff"/></svg>
